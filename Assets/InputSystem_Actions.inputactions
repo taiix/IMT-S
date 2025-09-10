@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputSystem_Actions",
     "maps": [
         {
@@ -986,6 +987,34 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "TouchScreen",
+            "id": "70f6d536-e1aa-4829-b3b5-aead701c1c73",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "501ab3dd-c51c-4dc1-9d40-269645cbad14",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "282170fe-9876-434e-b5cf-18048b736149",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
