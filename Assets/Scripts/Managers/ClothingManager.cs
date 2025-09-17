@@ -12,7 +12,9 @@ public class ClothingManager : MonoBehaviour
     {
         for (int i = 0; i < containers.Length; i++)
         {
-            containers[i].transform.GetChild(0).GetComponent<Image>().sprite = itemSOs[i].image;
+            Transform item = containers[i].transform.GetChild(0);
+            item.GetComponent<Image>().sprite = itemSOs[i].image;
+            
         }
     }
 }
