@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class EventManager
 {
@@ -12,4 +14,5 @@ public static class EventManager
     //With this, we dont care where the event is called from, we just care about what to do when the event is called
     //and we avoid reference issues and coupling.
 
+    public static UnityEvent<List<Vector3>> OnPathCalculated = new();
 }
