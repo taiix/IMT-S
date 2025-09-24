@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -25,7 +26,6 @@ public class A_Star : MonoBehaviour
     private Vector3 _lastStartCell;
     private Vector3 _lastEndCell;
 
-
     private void Start()
     {
         if (grid == null || playerPosition == null || endPosition == null)
@@ -43,7 +43,6 @@ public class A_Star : MonoBehaviour
     private void Update()
     {
         DynamicPathRecalculation();
-
     }
 
     private void DynamicPathRecalculation()
@@ -55,6 +54,9 @@ public class A_Star : MonoBehaviour
 
         var currentStartCell = grid.WorldToCell(playerPosition.position);
         var currentEndCell = grid.WorldToCell(endPosition.position);
+        
+        if (!IsWalkable(currentStartCell) || !IsWalkable(currentEndCell)) return;
+
         if (currentStartCell != _lastStartCell || currentEndCell != _lastEndCell)
         {
             _lastStartCell = currentStartCell;
@@ -81,6 +83,9 @@ public class A_Star : MonoBehaviour
             Debug.Log("A_Star: No path found.");
             return;
         }
+
+        EventManager.OnPathCalculated?.Invoke(path);
+
 
         if (pathGameObject != null)
         {
@@ -190,7 +195,6 @@ public class A_Star : MonoBehaviour
 
     private bool IsWalkable(Vector3Int cellPosition)
     {
-
         foreach (var obstacleTilemap in obstaclesTiles)
         {
             if (obstacleTilemap == null) continue;
@@ -198,8 +202,10 @@ public class A_Star : MonoBehaviour
                 return false; // Cell is blocked by an obstacle
         }
         return true; // Cell is walkable and not blocked
+    }
 
-
-
+    public void SetEndGoal(Vector3Int cellPos)
+    {
+        endPosition.position = grid.GetCellCenterWorld(cellPos);
     }
 }

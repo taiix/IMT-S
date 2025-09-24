@@ -49,7 +49,17 @@ public class DestinationSelector : MonoBehaviour
         if (cam == null || grid == null || target == null || pointAction == null)
             return;
 
-        ProcessPointerPosition();
+        if (Touchscreen.current != null)
+        {
+            if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                ProcessPointerPosition();
+            }
+        }
+        else if(Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            ProcessPointerPosition();
+        }
     }
 
     private void ProcessPointerPosition()
